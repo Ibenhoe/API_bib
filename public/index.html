@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentatie</title>
+</head>
+<body>
+    <h1>API Documentatie</h1>
+    <p>Welkom bij de documentatie van de API.</p>
+
+    <h2>Endpoints</h2>
+
+    <h3>Boeken</h3>
+    <ul>
+        <li>
+            <strong>GET /books</strong> - Haal alle boeken op.<br>
+            <em>Voorbeeldresponse:</em>
+            <pre>
+[
+    {
+        "_id": "63b6f7e593d87e72f4ecb3d4",
+        "title": "De Hobbit",
+        "author": "J.R.R. Tolkien",
+        "publishedYear": 1937,
+        "genre": "Fantasy",
+        "available": true
+    }
+]
+            </pre>
+        </li>
+        <li>
+            <strong>POST /books</strong> - Voeg een nieuw boek toe.<br>
+            <em>Body (JSON):</em>
+            <pre>
+{
+    "title": "De Hobbit",
+    "author": "J.R.R. Tolkien",
+    "publishedYear": 1937,
+    "genre": "Fantasy",
+    "available": true
+}
+            </pre>
+        </li>
+        <li>
+            <strong>PUT /books/:id</strong> - Werk een bestaand boek bij.<br>
+            <em>Body (JSON):</em>
+            <pre>
+{
+    "title": "De Hobbit (Updated)"
+}
+            </pre>
+        </li>
+        <li>
+            <strong>DELETE /books/:id</strong> - Verwijder een boek.
+        </li>
+    </ul>
+
+    <h3>Auteurs</h3>
+    <ul>
+        <li>
+            <strong>GET /authors</strong> - Haal alle auteurs op.
+        </li>
+        <li>
+            <strong>POST /authors</strong> - Voeg een nieuwe auteur toe.<br>
+            <em>Body (JSON):</em>
+            <pre>
+{
+    "name": "J.R.R. Tolkien",
+    "bio": "Schrijver van De Hobbit en De Lord of the Rings",
+    "birthDate": "1892-01-03"
+}
+            </pre>
+        </li>
+    </ul>
+
+    <h2>Validatie</h2>
+    <p>Let op: De volgende regels gelden voor het invoeren van gegevens:</p>
+    <ul>
+        <li>Titel en auteur zijn verplicht voor boeken.</li>
+        <li>Het publicatiejaar moet een geldig getal zijn.</li>
+        <li>Naam van de auteur is verplicht.</li>
+        <li>Geboortedatum moet een geldige datum zijn.</li>
+    </ul>
+</body>
+</html>
