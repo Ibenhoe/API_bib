@@ -4,83 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentatie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #ddd;
+            overflow-x: auto;
+        }
+        code {
+            color: #d6336c;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>API Documentatie</h1>
-    <p>Welkom bij de documentatie van de API.</p>
+    <p>Deze API biedt functionaliteiten om boeken en auteurs te beheren. Hieronder staan alle beschikbare endpoints beschreven.</p>
 
-    <h2>Endpoints</h2>
+    <h2>Boek Endpoints</h2>
+    
+    <div class="endpoint">
+        <h3>1. Alle boeken ophalen</h3>
+        <p><strong>URL:</strong> <code>GET /books</code></p>
+        <p><strong>Query Parameters:</strong></p>
+        <ul>
+            <li><code>limit</code> (optioneel) - Maximaal aantal resultaten (standaard: 10).</li>
+            <li><code>offset</code> (optioneel) - Startpunt in de resultaten (standaard: 0).</li>
+            <li><code>sortBy</code> (optioneel) - Veld waarop gesorteerd wordt (standaard: <code>title</code>).</li>
+            <li><code>order</code> (optioneel) - Sorteervolgorde (<code>asc</code> of <code>desc</code>).</li>
+        </ul>
+        <p><strong>Voorbeeld:</strong></p>
+        <pre>GET /books?limit=5&offset=0&sortBy=publishedYear&order=desc</pre>
+    </div>
 
-    <h3>Boeken</h3>
-    <ul>
-        <li>
-            <strong>GET /books</strong> - Haal alle boeken op.<br>
-            <em>Voorbeeldresponse:</em>
-            <pre>
-[
-    {
-        "_id": "63b6f7e593d87e72f4ecb3d4",
-        "title": "De Hobbit",
-        "author": "J.R.R. Tolkien",
-        "publishedYear": 1937,
-        "genre": "Fantasy",
-        "available": true
-    }
-]
-            </pre>
-        </li>
-        <li>
-            <strong>POST /books</strong> - Voeg een nieuw boek toe.<br>
-            <em>Body (JSON):</em>
-            <pre>
+    <div class="endpoint">
+        <h3>2. Boeken zoeken</h3>
+        <p><strong>URL:</strong> <code>GET /books/search</code></p>
+        <p><strong>Query Parameters:</strong></p>
+        <ul>
+            <li><code>title</code> (optioneel) - Zoek op titel.</li>
+            <li><code>author</code> (optioneel) - Zoek op auteur.</li>
+        </ul>
+        <p><strong>Voorbeeld:</strong></p>
+        <pre>GET /books/search?title=Harry Potter&author=J.K. Rowling</pre>
+    </div>
+
+    <div class="endpoint">
+        <h3>3. Nieuw boek toevoegen</h3>
+        <p><strong>URL:</strong> <code>POST /books</code></p>
+        <p><strong>Body Parameters (JSON):</strong></p>
+        <ul>
+            <li><code>title</code> (verplicht) - Titel van het boek.</li>
+            <li><code>author</code> (verplicht) - Auteur van het boek.</li>
+            <li><code>publishedYear</code> (verplicht) - Jaar waarin het boek is gepubliceerd.</li>
+        </ul>
+        <p><strong>Voorbeeld:</strong></p>
+        <pre>
+POST /books
 {
-    "title": "De Hobbit",
-    "author": "J.R.R. Tolkien",
-    "publishedYear": 1937,
-    "genre": "Fantasy",
-    "available": true
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publishedYear": 1925
 }
-            </pre>
-        </li>
-        <li>
-            <strong>PUT /books/:id</strong> - Werk een bestaand boek bij.<br>
-            <em>Body (JSON):</em>
-            <pre>
-{
-    "title": "De Hobbit (Updated)"
-}
-            </pre>
-        </li>
-        <li>
-            <strong>DELETE /books/:id</strong> - Verwijder een boek.
-        </li>
-    </ul>
+        </pre>
+    </div>
 
-    <h3>Auteurs</h3>
-    <ul>
-        <li>
-            <strong>GET /authors</strong> - Haal alle auteurs op.
-        </li>
-        <li>
-            <strong>POST /authors</strong> - Voeg een nieuwe auteur toe.<br>
-            <em>Body (JSON):</em>
-            <pre>
-{
-    "name": "J.R.R. Tolkien",
-    "bio": "Schrijver van De Hobbit en De Lord of the Rings",
-    "birthDate": "1892-01-03"
-}
-            </pre>
-        </li>
-    </ul>
+    <h2>Auteur Endpoints</h2>
+    
+    <div class="endpoint">
+        <h3>1. Alle auteurs ophalen</h3>
+        <p><strong>URL:</strong> <code>GET /authors</code></p>
+        <p><strong>Voorbeeld:</strong></p>
+        <pre>GET /authors</pre>
+    </div>
 
-    <h2>Validatie</h2>
-    <p>Let op: De volgende regels gelden voor het invoeren van gegevens:</p>
-    <ul>
-        <li>Titel en auteur zijn verplicht voor boeken.</li>
-        <li>Het publicatiejaar moet een geldig getal zijn.</li>
-        <li>Naam van de auteur is verplicht.</li>
-        <li>Geboortedatum moet een geldige datum zijn.</li>
-    </ul>
+    <div class="endpoint">
+        <h3>2. Nieuwe auteur toevoegen</h3>
+        <p><strong>URL:</strong> <code>POST /authors</code></p>
+        <p><strong>Body Parameters (JSON):</strong></p>
+        <ul>
+            <li><code>name</code> (verplicht) - Naam van de auteur.</li>
+            <li><code>birthDate</code> (verplicht) - Geboortedatum in ISO8601-formaat (<code>YYYY-MM-DD</code>).</li>
+        </ul>
+        <p><strong>Voorbeeld:</strong></p>
+        <pre>
+POST /authors
+{
+    "name": "George Orwell",
+    "birthDate": "1903-06-25"
+}
+        </pre>
+    </div>
+
 </body>
 </html>
