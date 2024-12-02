@@ -25,7 +25,7 @@ const seedData = async () => {
         ]);
         console.log('Auteurs toegevoegd:', authors);
 
-        // Voeg test boeken toe met de naam van de auteur in plaats van de _id
+        
         const books = await Book.insertMany([
             { title: 'Harry Potter and the Sorcerer\'s Stone', author: 'J.K. Rowling', publishedYear: 1997 },
             { title: 'A Game of Thrones', author: 'George R.R. Martin', publishedYear: 1996 },
@@ -36,10 +36,10 @@ const seedData = async () => {
         console.log('Boeken toegevoegd:', books);
 
         console.log('Database succesvol gevuld met testdata!');
-        process.exit(0); // Script beëindigen
+        process.exit(0); 
     } catch (error) {
         console.error('Fout bij het vullen van de database:', error);
-        process.exit(1); // Script beëindigen met foutcode
+        process.exit(1); 
     }
 };
 
