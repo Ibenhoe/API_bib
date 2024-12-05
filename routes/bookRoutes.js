@@ -8,16 +8,15 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const limit = parseInt(req.query.limit) || 10; 
     const offset = parseInt(req.query.offset) || 0; 
-    const { sortBy = 'title', order = 'asc' } = req.query; 
+    const { sortBy = 'title', order = 'asc' } = req.query;
 
     try {
-        // Vind boeken met offset, limit, en sortering
         const books = await Book.find()
             .sort({ [sortBy]: order === 'asc' ? 1 : -1 }) 
             .skip(offset)
             .limit(limit);
 
-        const total = await Book.countDocuments(); 
+        const total = await Book.countDocuments();
 
         res.json({
             total,
@@ -32,7 +31,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-
+// Zoek boeken op titel of auteur
 router.get('/search', async (req, res) => {
     const { title, author } = req.query;
 
@@ -56,8 +55,8 @@ router.post(
     '/',
     [
         body('title').notEmpty().withMessage('Titel is verplicht'),
-        body('author').notEmpty().withMessage('Auteur is verplicht'),
-        body('publishedYear').isInt().withMessage('Jaar moet een getal zijn'),
+        body('author').notEmpty().withMessage('Auteur is verplicht'), 
+        body('publishedYear').isInt().withMessage('Jaar moet een getal zijn'), 
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -66,13 +65,15 @@ router.post(
         }
 
         try {
-            const newBook = new Book(req.body);
-            const savedBook = await newBook.save();
-            res.status(201).json(savedBook);
+            const newBook = new Book(req.body); 
+            const savedBook = await newBook.save(); 
+            res.status(201).json(savedBook); 
         } catch (error) {
             res.status(500).json({ error: 'Serverfout' });
         }
     }
 );
+
+
 
 module.exports = router;
