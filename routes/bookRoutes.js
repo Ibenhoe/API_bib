@@ -6,15 +6,11 @@ const router = express.Router();
 
 // Alle boeken ophalen
 router.get('/', async (req, res) => {
-<<<<<<< HEAD
-    const limit = parseInt(req.query.limit) || 10; 
-    const offset = parseInt(req.query.offset) || 0; 
-    const { sortBy = 'title', order = 'asc' } = req.query;
-=======
+
     const limit = parseInt(req.query.limit) || 10; // Max aantal resultaten
     const offset = parseInt(req.query.offset) || 0; // Startpunt in de lijst
     const { sortBy = 'title', order = 'asc' } = req.query; // Sorteerveld en volgorde
->>>>>>> parent of 498b6b1 (Updating readme)
+
 
     try {
         const books = await Book.find()
@@ -22,11 +18,10 @@ router.get('/', async (req, res) => {
             .skip(offset)
             .limit(limit);
 
-<<<<<<< HEAD
-        const total = await Book.countDocuments();
-=======
+
+
         const total = await Book.countDocuments(); // Totaal aantal boeken
->>>>>>> parent of 498b6b1 (Updating readme)
+
 
         res.json({
             total,
