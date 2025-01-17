@@ -18,3 +18,4 @@ https://www.youtube.com/watch?v=Pb_0b7Y5NEk
 https://www.youtube.com/watch?v=pKd0Rpw7O48
 https://chatgpt.com/share/674e2397-768c-8007-b1a4-42ce5d983bf0
 https://www.twilio.com/docs/usage/api/address
+De chatgpt links zijn niet deelbaar door de foto's die in de chat zitten.
